@@ -50,13 +50,13 @@ RDSCONN
   filename = "rds_conn_configmap.yaml"
 }
 
-resource "local_file" "service_wordpress" {
+resource "local_file" "service-notes" {
   content = <<SERVICE
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: wordpress-service
+  name: notes-service
   annotations:
     # Note that the backend talks over HTTP.
     service.beta.kubernetes.io/aws-load-balancer-backend-protocol: http
@@ -67,7 +67,7 @@ metadata:
 spec:
   type: LoadBalancer
   selector:
-    app: wordpress
+    app: notes
   ports:
   - name: http
     port: 80
@@ -78,5 +78,5 @@ spec:
 
 SERVICE
 
-  filename= "service_wordpress.yaml"
+  filename= "service-notes.yaml"
 }
