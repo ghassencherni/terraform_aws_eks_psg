@@ -39,10 +39,11 @@ metadata:
   name: rds-conn
   namespace: default
 data:
-  WORDPRESS_DB_HOST: "${module.rds.wordpress_db_endpoint}"
-  WORDPRESS_DB_NAME: "${var.dbname}"
-  WORDPRESS_DB_PASSWORD: "${var.dbpassword}"
-  WORDPRESS_DB_USER: "${var.dbuser}"
+
+  DB_HOST: "${module.rds.wordpress_db_endpoint}"
+  DB_PASSWORD: "${var.dbpassword}"
+  DB_USERNAME: "${var.dbuser}"
+
 
 RDSCONN
 
