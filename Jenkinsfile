@@ -27,7 +27,7 @@ node {
         sh label: 'terraform apply', script: "export AWS_ACCESS_KEY_ID='$ACCESS_KEY';export AWS_SECRET_ACCESS_KEY='$SECRET_ACCESS';terraform apply -lock=false -input=false tfplan"
 
         /* "rds_conn_configmap.yaml" and "config" files are needed to deploy the wordpress EKS cluster, we will used it as artifacts */
-        archiveArtifacts artifacts: 'service_wordpress.yaml, rds_conn_configmap.yaml, config'
+        archiveArtifacts artifacts: 'service-notes.yaml, rds_conn_configmap.yaml, config'
 
     }
   }
@@ -48,10 +48,9 @@ node {
     withCredentials([usernamePassword(credentialsId: 'aws_credentials', usernameVariable: 'ACCESS_KEY', passwordVariable: 'SECRET_ACCESS')])
     {
       /* Trigger wordpress_k8s job in order to destroy the wordpress cluster */
-      build job: 'wordpress_k8s', parameters: [string(name: 'Action', value: 'Destroy Wordpress')], quietPeriod: 5 
+      /* build job: 'wordpress_k8s', parameters: [string(name: 'Action', value: 'Destroy Wordpress')], quietPeriod: 5 */
       sh label: 'Destroy environment', script: "export AWS_ACCESS_KEY_ID='$ACCESS_KEY';export AWS_SECRET_ACCESS_KEY='$SECRET_ACCESS';terraform apply -lock=false -input=false tfdestroyplan" 
     }
    }
   }
 }
-
