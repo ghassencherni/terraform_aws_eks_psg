@@ -1,12 +1,12 @@
-# terraform_aws_eks
-Pipeline (Jenkinsfile) to deploy AWS resources on AWS, it comes with other projects : [deploy_jenkins](https://github.com/ghassencherni/deploy_jenkins), [wordpress_k8s](https://github.com/ghassencherni/wordpress_k8s) and [wp_custom_docker](https://github.com/ghassencherni/wp_custom_docker).
+# terraform_aws_eks_psg
+Pipeline (Jenkinsfile) to deploy AWS resources on AWS, it comes with other projects : [deploy_jenkins_for_EKS](https://github.com/ghassencherni/deploy_jenkins_for_EKS), [notes_k8s](https://github.com/ghassencherni/notes_k8s) and [notes_docker](https://github.com/ghassencherni/notes_docker).
 
-Please start loocking in [deploy_jenkins](https://github.com/ghassencherni/deploy_jenkins) First.
+Please start loocking in [deploy_jenkins_for_EKS](https://github.com/ghassencherni/deploy_jenkins_for_EKS) First.
 
 
 ## Getting Started
 
-This Jenkinsfile allows to build the needed resources on AWS in order to run wordpress ( from a customized image ) on EKS:
+This Jenkinsfile allows to build the needed resources on AWS in order to run "Mynotes" application on EKS:
 
 It calls terraform to deploy 3 modules :
 
@@ -47,15 +47,13 @@ It calls terraform to deploy 3 modules :
 
 - RDS module: 
 
--- Create the RDS instance ( used as wordpress DB for the cluster )
+-- Create the RDS instance ( used as "Mynotes" DB for the cluster / POSTGRES DB )
 
 
  
 ## Requirements
 
 - AWS access key ID and Secret key access must be stored on Jenkins ( Global credential ) with the id "aws_credentials"
-
-- Gitlab account ( user and password ) must be stored on Jenkins ( Global credential ) with the id "gitlab_registry"
 
 
 ## Variables
@@ -88,17 +86,17 @@ It calls terraform to deploy 3 modules :
 
 - The AWS RDS name
 
-    identifier = "wordpressdb"
+    identifier = "notes"
 
 
-- The dabase name ( default wordpressdb ) 
+- The dabase name ( default notes ) 
 
-dbname = "wordpressdb"
+dbname = "notes"
 
 
 - The database user 
 
-    dbuser = "wordpressuser"
+    dbuser = "db_user"
 
 
 - The database password 
